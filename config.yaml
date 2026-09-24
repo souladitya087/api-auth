@@ -1,0 +1,31 @@
+target_base_url: "http://127.0.0.1:8000"
+
+personas:
+  user_a:
+    name: "User_A (Alice)"
+    role: "user"
+    headers:
+      Authorization: "Bearer token-alice-123"
+    owned_resources:
+      doc_id: "doc_101"
+      user_id: "user_1"
+
+  user_b:
+    name: "User_B (Bob)"
+    role: "user"
+    headers:
+      Authorization: "Bearer token-bob-456"
+    owned_resources:
+      doc_id: "doc_202"
+      user_id: "user_2"
+
+  admin:
+    name: "System_Admin"
+    role: "admin"
+    headers:
+      Authorization: "Bearer token-admin-789"
+
+  anonymous:
+    name: "Anonymous_Guest"
+    role: "anonymous"
+    headers: {}
