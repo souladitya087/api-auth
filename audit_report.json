@@ -1,0 +1,45 @@
+{
+  "total_endpoints_scanned": 4,
+  "total_tests_executed": 8,
+  "findings_count": {
+    "CRITICAL": 1,
+    "HIGH": 1,
+    "MEDIUM": 0,
+    "LOW": 0
+  },
+  "findings": [
+    {
+      "title": "Broken Object Level Authorization (BOLA) in /api/v1/documents/{doc_id}",
+      "vulnerability_type": "BOLA",
+      "owasp_id": "API1:2023 - Broken Object Level Authorization",
+      "severity": "CRITICAL",
+      "endpoint": "/api/v1/documents/{doc_id}",
+      "method": "GET",
+      "details": "User 'User_B (Bob)' was able to access or modify resource {'doc_id': 'doc_101'} belonging to 'User_A (Alice)' via GET /api/v1/documents/{doc_id}. Server returned HTTP 200.",
+      "evidence": {
+        "owner_persona": "User_A (Alice)",
+        "attacker_persona": "User_B (Bob)",
+        "baseline_status": 200,
+        "cross_swap_status": 200,
+        "response_snippet": "{\"document\":{\"content\":\"Secret Project 2026\",\"id\":\"doc_101\",\"owner_id\":\"user_1\",\"title\":\"Alice Confidential Strategy\"},\"status\":\"success\"}\n"
+      },
+      "reproduction_curl": "curl -X GET http://127.0.0.1:8000/api/v1/documents/doc_101 -H 'Authorization: Bearer token-bob-456'",
+      "remediation": "Validate that the authenticated requester possesses explicit ownership or tenancy over the requested object identifier in database queries. Example: `SELECT * FROM items WHERE id = :id AND owner_id = :auth_user_id`."
+    },
+    {
+      "title": "Broken Function Level Authorization on Admin Endpoint (/api/v1/admin/system-stats)",
+      "vulnerability_type": "BFLA",
+      "owasp_id": "API5:2023 - Broken Function Level Authorization",
+      "severity": "HIGH",
+      "endpoint": "/api/v1/admin/system-stats",
+      "method": "GET",
+      "details": "Standard user 'User_A (Alice)' successfully invoked administrative endpoint GET /api/v1/admin/system-stats receiving HTTP 200. Role-Based Access Control (RBAC) was not enforced.",
+      "evidence": {
+        "status_code": 200,
+        "response_snippet": "{\"status\":\"success\",\"system_stats\":{\"active_sessions\":432,\"database_load\":\"12%\",\"internal_ip\":\"10.0.4.15\",\"server_version\":\"v3.14-enterprise\"}}\n"
+      },
+      "reproduction_curl": "curl -X GET http://127.0.0.1:8000/api/v1/admin/system-stats -H 'Authorization: Bearer token-alice-123'",
+      "remediation": "Implement role-based authorization checks (e.g., verifying user.role == 'ADMIN') at the route guard or middleware level before executing administrative operations."
+    }
+  ]
+}
