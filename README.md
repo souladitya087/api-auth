@@ -64,7 +64,7 @@ flowchart TD
 ### 1. Installation
 Clone the repository and install the dependencies:
 ```bash
-git clone https://github.com/your-username/authscope-api-auditor.git
+git clone https://github.com/souladitya087/authscope-api-auditor.git
 cd authscope-api-auditor
 pip install -r requirements.txt
 ```
@@ -125,17 +125,6 @@ The tool will print an executive terminal report and generate both `AUDIT_REPORT
 
 ---
 
-## 💼 How to Present This on Your Resume
-
-Add this project under your **Projects** section with high-impact engineering bullet points:
-
-```markdown
-**AuthScope – Automated API Authorization & Access Control Auditor** | Python, AsyncIO, HTTPX, Pydantic
-- Engineered an automated dynamic API security testing tool detecting Broken Object Level Authorization (OWASP API1:2023) and privilege escalation across multi-tenant environments.
-- Implemented an OpenAPI 3.0 specification parser and an asynchronous differential HTTP execution engine simulating concurrent cross-tenant token swaps.
-- Automated developer reproduction by synthesizing exact cURL repro commands and generating structured Markdown/JSON vulnerability reports for CI/CD integration.
-- Developed a containerized multi-tenant test microservice with positive and negative access control testbeds, achieving 100% test coverage on baseline authorization assertions.
-```
 
 ---
 
