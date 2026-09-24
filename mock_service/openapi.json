@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Corporate Document & Identity Service",
+    "version": "1.0.0",
+    "description": "Multi-tenant REST API managing enterprise documents and user profiles."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8000"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Public health status probe.",
+        "responses": {
+          "200": {
+            "description": "Service is operational"
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{doc_id}": {
+      "get": {
+        "summary": "Get Document by ID",
+        "description": "Retrieves document content by document identifier.",
+        "tags": ["Documents"],
+        "parameters": [
+          {
+            "name": "doc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "doc_101"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document details returned successfully"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Document not found"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/system-stats": {
+      "get": {
+        "summary": "Administrative System Statistics",
+        "description": "Privileged metrics and host telemetry.",
+        "tags": ["Admin", "System"],
+        "responses": {
+          "200": {
+            "description": "Host metrics returned"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/profile/{user_id}": {
+      "get": {
+        "summary": "Retrieve User Profile",
+        "description": "Fetches profile information for a tenant.",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "user_1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile data returned"
+          },
+          "403": {
+            "description": "Access forbidden across tenant boundary"
+          }
+        }
+      }
+    }
+  }
+}
