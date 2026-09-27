@@ -2,7 +2,6 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
 [![OWASP Standard](https://img.shields.io/badge/OWASP-API%20Security%20Top%2010-orange.svg)](https://owasp.org/www-project-api-security/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 An asynchronous dynamic security auditor designed to detect **Broken Object Level Authorization (BOLA / IDOR)** and **Broken Function Level Authorization (BFLA)** in modern REST APIs using OpenAPI specifications and multi-identity persona matrices.
 
